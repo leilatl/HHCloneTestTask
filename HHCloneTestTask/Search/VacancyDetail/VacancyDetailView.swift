@@ -46,20 +46,20 @@ extension VacancyDetailView {
 
             Button(action: {
             }, label: {
-                Image(systemName: "eye")
+                Image.local.eyeOutline
                     .foregroundStyle(Color.white)
             })
 
             Button(action: {
             }, label: {
-                Image(systemName: "square.and.arrow.up")
+                Image.local.share
                     .foregroundStyle(Color.white)
             })
 
             Button(action: {
                 viewModel.didTapFavoriteButton()
             }, label: {
-                Image(systemName: viewModel.vacancy.isFavorite ? "heart.fill" : "heart")
+                Image(viewModel.vacancy.isFavorite ? "heart" : "heart.outline")
                     .resizable()
                     .foregroundStyle(
                         viewModel.vacancy.isFavorite
@@ -91,15 +91,19 @@ extension VacancyDetailView {
                 .frame(maxWidth: .infinity, alignment: .leading)
 
                 HStack(spacing: 8, content: {
-                    statisticsView(
-                        number: viewModel.vacancy.appliedNumber ?? 0,
-                        title: "человек уже откликнулись",
-                        image: Image("appliedNumber"))
-
-                    statisticsView(
-                        number: viewModel.vacancy.lookingNumber ?? 0,
-                        title: "человека сейчас смотрят",
-                        image: Image("lookingNumber"))
+                    if let appliedNumber = viewModel.vacancy.appliedNumber {
+                        statisticsView(
+                            number: appliedNumber,
+                            title: "человек уже откликнулись",
+                            image: Image.local.appliedNumber)
+                    }
+                    
+                    if let lookingNumber = viewModel.vacancy.lookingNumber {
+                        statisticsView(
+                            number: lookingNumber,
+                            title: "человека сейчас смотрят",
+                            image: Image.local.lookingNumber)
+                    }
 
                 })
                 .frame(maxWidth: .infinity)
@@ -163,10 +167,10 @@ extension VacancyDetailView {
                 Text(viewModel.vacancy.company ?? "")
                     .foregroundStyle(Color.white)
                     .font(.system(size: 16, weight: .medium))
-                Image(systemName: "checkmark.circle")
+                Image.local.checkMark
                     .foregroundStyle(Color.theme.grayText)
             })
-            Image("map")
+            Image.local.map
                 .resizable()
                 .frame(maxWidth: .infinity)
             Text(makeAddressString())

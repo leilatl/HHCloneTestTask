@@ -59,7 +59,5 @@ class SearchViewModel: ObservableObject {
         } else {
             favoriteVacanciesService.deleteVacancy(vacancies[index])
         }
-        // print(favoriteVacanciesService.fetchAllVacancies())
-        // print(favoriteVacanciesService.fetchAllVacancies().count)
     }
 }

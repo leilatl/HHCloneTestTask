@@ -10,7 +10,9 @@ import SwiftUI
 struct EmptyView: View {
     var body: some View {
         VStack {
-            
+            Text("Empty View")
+                .frame(maxWidth: .infinity)
+            Spacer()
         }
         .background(Color.black)
         .frame(maxWidth: .infinity, maxHeight: .infinity)

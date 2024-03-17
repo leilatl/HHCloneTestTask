@@ -16,7 +16,7 @@ struct VacancyView: View {
                 Button(action: {
                     onFavoriteButtonTap()
                 }, label: {
-                    Image(systemName: vacancyModel.isFavorite ? "heart.fill" : "heart")
+                    Image(vacancyModel.isFavorite ? "heart" : "heart.outline")
                         .resizable()
                         .foregroundStyle(
                             vacancyModel.isFavorite 
@@ -43,13 +43,13 @@ struct VacancyView: View {
                             Text(vacancyModel.company ?? "")
                                 .foregroundStyle(Color.white)
                                 .font(.system(size: 14))
-                            Image(systemName: "checkmark.circle")
+                            Image.local.checkMark
                                 .foregroundStyle(Color.theme.grayText)
                         })
                     })
 
                     HStack(spacing: 8, content: {
-                        Image(systemName: "bag")
+                        Image.local.bag
                             .foregroundStyle(Color.theme.grayText)
                         Text(vacancyModel.experience?.previewText ?? "")
                             .foregroundStyle(Color.white)
@@ -72,10 +72,11 @@ struct VacancyView: View {
                     .foregroundStyle(Color.white)
                     .font(.system(size: 14))
                     .padding(7)
+                    .frame(maxWidth: .infinity)
+                    .background(Color.theme.specialGreen)
+                    .clipShape(RoundedRectangle(cornerRadius: 16))
             })
-            .frame(maxWidth: .infinity)
-            .background(Color.theme.specialGreen)
-            .clipShape(RoundedRectangle(cornerRadius: 16))
+            
         })
         .padding(16)
         .frame(maxWidth: .infinity)

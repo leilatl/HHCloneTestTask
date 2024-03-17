@@ -18,7 +18,7 @@ struct SecurityCodeView: View {
 
     private var isButtonEnabled: Bool {
         !digit1.isEmpty && !digit2.isEmpty
-        && !digit3.isEmpty && !digit4.isEmpty
+            && !digit3.isEmpty && !digit4.isEmpty
     }
 
     var body: some View {
@@ -47,6 +47,7 @@ struct SecurityCodeView: View {
                         isButtonEnabled ? 1 : 0.5
                     ))
             }
+            .disabled(!isButtonEnabled)
             .background(Color.theme.specialBlue.opacity(
                 isButtonEnabled ? 1 : 0.5
             ))
@@ -134,15 +135,22 @@ struct SingleDigitTextField: View {
                     focusedField == currentField || !text.isEmpty ? 0 : 1
                 )
             TextField("", text: $text)
+                .foregroundStyle(Color.white)
                 .onChange(of: text, { _, newValue in
-                    if newValue.count > 1 {
+                    let filtered = newValue.filter { $0.isNumber }
+
+                    if filtered != newValue {
+                        text = filtered
+                    }
+                    if filtered.count > 1 {
                         text = String(newValue.last ?? Character(""))
                     }
 
-                    if !newValue.isEmpty {
+                    if !filtered.isEmpty {
                         focusedField = nextField
                     }
                 })
+                .keyboardType(.numberPad)
                 .focused($focusedField, equals: currentField)
         }
     }

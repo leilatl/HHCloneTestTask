@@ -11,10 +11,12 @@ import Foundation
 class FavoriteVacanciesService {
     private let context: NSManagedObjectContext
     @Published var favoriteVacancies: [VacancyModel] = []
+    @Published var favoriteCount = 0
 
     init(context: NSManagedObjectContext) {
         self.context = context
         favoriteVacancies = fetchAllVacancies()
+        favoriteCount = favoriteVacancies.count
     }
 
     func addVacancy(_ vacancyModel: VacancyModel) {
@@ -71,6 +73,7 @@ class FavoriteVacanciesService {
         do {
             try context.save()
             favoriteVacancies.append(vacancyModel)
+            favoriteCount += 1
         } catch {
             print("Error saving context: \(error)")
         }
@@ -87,6 +90,7 @@ class FavoriteVacanciesService {
             }
             try context.save()
             favoriteVacancies = fetchAllVacancies()
+            favoriteCount -= 1
         } catch {
             print("Error deleting vacancies: \(error)")
         }

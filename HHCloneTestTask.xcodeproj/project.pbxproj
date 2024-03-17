@@ -15,7 +15,6 @@
 		CE6D1DE22B75743200E89C76 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE6D1DE12B75743200E89C76 /* Assets.xcassets */; };
 		CE6D1DE52B75743200E89C76 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE6D1DE32B75743200E89C76 /* LaunchScreen.storyboard */; };
 		CE6D1DF02B7574C100E89C76 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6D1DEF2B7574C100E89C76 /* AppCoordinator.swift */; };
-		CE6D1DF82B75764600E89C76 /* ServerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6D1DF72B75764600E89C76 /* ServerModel.swift */; };
 		CE6D1DFB2B75765900E89C76 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6D1DFA2B75765900E89C76 /* Color.swift */; };
 		CEED12B42BA5D921001B477B /* EmtyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEED12B32BA5D921001B477B /* EmtyView.swift */; };
 		CEED12B62BA5D984001B477B /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEED12B52BA5D984001B477B /* SearchView.swift */; };
@@ -30,6 +29,7 @@
 		CEED12CC2BA69A3B001B477B /* FavoriteVacanciesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEED12CB2BA69A3B001B477B /* FavoriteVacanciesService.swift */; };
 		CEED12D22BA6B47A001B477B /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEED12D12BA6B47A001B477B /* CoreDataManager.swift */; };
 		CEED12D42BA6C336001B477B /* FavoritesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEED12D32BA6C336001B477B /* FavoritesViewModel.swift */; };
+		CEED12E22BA744F3001B477B /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEED12E12BA744F3001B477B /* Image.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,7 +43,6 @@
 		CE6D1DE42B75743200E89C76 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CE6D1DE62B75743200E89C76 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE6D1DEF2B7574C100E89C76 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
-		CE6D1DF72B75764600E89C76 /* ServerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerModel.swift; sourceTree = "<group>"; };
 		CE6D1DFA2B75765900E89C76 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		CEED12B32BA5D921001B477B /* EmtyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmtyView.swift; sourceTree = "<group>"; };
 		CEED12B52BA5D984001B477B /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
@@ -58,6 +57,7 @@
 		CEED12CB2BA69A3B001B477B /* FavoriteVacanciesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteVacanciesService.swift; sourceTree = "<group>"; };
 		CEED12D12BA6B47A001B477B /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		CEED12D32BA6C336001B477B /* FavoritesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewModel.swift; sourceTree = "<group>"; };
+		CEED12E12BA744F3001B477B /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,7 +138,6 @@
 		CE6D1DF62B75763800E89C76 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				CE6D1DF72B75764600E89C76 /* ServerModel.swift */,
 				CEED12BB2BA5E9ED001B477B /* VacancyModel.swift */,
 			);
 			path = Model;
@@ -148,6 +147,7 @@
 			isa = PBXGroup;
 			children = (
 				CE6D1DFA2B75765900E89C76 /* Color.swift */,
+				CEED12E12BA744F3001B477B /* Image.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -284,7 +284,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE6D1DF82B75764600E89C76 /* ServerModel.swift in Sources */,
 				CE5B242E2BA425CC0025782E /* EntryView.swift in Sources */,
 				CEED12C62BA62B7E001B477B /* VacancyDetailViewModel.swift in Sources */,
 				CE5B24302BA425D60025782E /* EntryViewModel.swift in Sources */,
@@ -292,6 +291,7 @@
 				CE5B24332BA5AD7F0025782E /* SecurityCodeView.swift in Sources */,
 				CEED12BA2BA5E95A001B477B /* SearchViewModel.swift in Sources */,
 				CEED12BC2BA5E9ED001B477B /* VacancyModel.swift in Sources */,
+				CEED12E22BA744F3001B477B /* Image.swift in Sources */,
 				CEED12C92BA690C5001B477B /* Vacancy.xcdatamodeld in Sources */,
 				CEED12B42BA5D921001B477B /* EmtyView.swift in Sources */,
 				CEED12C12BA61C78001B477B /* VacancyProvider.swift in Sources */,

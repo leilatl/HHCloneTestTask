@@ -5,6 +5,7 @@
 //  Created by Leila Serebrova on 08.12.2023.
 //
 
+import Combine
 import SwiftUI
 import UIKit
 
@@ -33,15 +34,15 @@ enum AppTab {
     var icon: UIImage? {
         switch self {
         case .search:
-            UIImage(systemName: "magnifyingglass")
+            UIImage(named: "magnifyingglass")
         case .favorites:
-            UIImage(systemName: "heart")
+            UIImage(named: "heart.outline")
         case .responds:
-            UIImage(systemName: "envelope")
+            UIImage(named: "envelope")
         case .messages:
-            UIImage(systemName: "message")
+            UIImage(named: "messages")
         case .profile:
-            UIImage(systemName: "person")
+            UIImage(named: "profile")
         }
     }
 }
@@ -51,11 +52,23 @@ class AppCoordinator {
     let sharedVacancyProvider = VacancyProvider()
     let context = CoreDataManager.shared.mainContext
     lazy var sharedFavoriteVacanciesService = FavoriteVacanciesService(context: context)
+    private var cancellables = Set<AnyCancellable>()
     var window: UIWindow
 
     init(window: UIWindow) {
         self.window = window
         tabBarController = UITabBarController()
+
+        sharedFavoriteVacanciesService.$favoriteCount
+            .receive(on: RunLoop.main)
+            .sink { [weak self] count in
+                self?.updateFavoritesTabIcon(count: count)
+            }
+            .store(in: &cancellables)
+        
+        let peopleCount = 5
+        let peopleString = String.localizedStringWithFormat(NSLocalizedString("%d people", comment: "Number of people"), peopleCount)
+        print("hello \(peopleString)")
     }
 
     func start() {
@@ -71,6 +84,16 @@ class AppCoordinator {
 
         window.rootViewController = tabBarController
         window.makeKeyAndVisible()
+    }
+
+    private func updateFavoritesTabIcon(count: Int) {
+        if let tabItems = tabBarController.tabBar.items {
+            let favoritesTabIndex = 1
+            if tabItems.indices.contains(favoritesTabIndex) {
+                let item = tabItems[favoritesTabIndex]
+                item.badgeValue = count > 0 ? "\(count)" : nil
+            }
+        }
     }
 
     private func setupTabs(tabs: [(tab: AppTab, viewController: UIViewController)]) {
@@ -134,11 +157,11 @@ class AppCoordinator {
             vacancyProvider: sharedVacancyProvider,
             favoriteVacanciesService: sharedFavoriteVacanciesService)
         let searchController = UIHostingController(rootView: SearchView(viewModel: viewModel))
-        
+
         viewModel.onAction = { [weak searchController, weak self] (action: SearchViewModel.Event) in
             guard let self else { return }
             switch action {
-            case .didChooseVacancy(let vacancy):
+            case let .didChooseVacancy(vacancy):
                 searchController?.navigationController?.pushViewController(
                     self.vacancyDetailScreen(vacancy: vacancy),
                     animated: true
@@ -148,11 +171,11 @@ class AppCoordinator {
 
         return searchController
     }
-    
+
     private func vacancyDetailScreen(vacancy: VacancyModel) -> UIViewController {
         let viewModel = VacancyDetailViewModel(vacancy: vacancy, favoriteVacanciesService: sharedFavoriteVacanciesService)
         let vacancyDetailController = UIHostingController(rootView: VacancyDetailView(viewModel: viewModel))
-        
+
         viewModel.onAction = { [weak vacancyDetailController, weak self] (action: VacancyDetailViewModel.Event) in
             guard let self else { return }
             switch action {
@@ -167,6 +190,17 @@ class AppCoordinator {
     private func favoritesScreen() -> UIViewController {
         let viewModel = FavoritesViewModel(favoriteVacanciesService: sharedFavoriteVacanciesService)
         let favoritesController = UIHostingController(rootView: FavoritesView(viewModel: viewModel))
+
+        viewModel.onAction = { [weak favoritesController, weak self] action in
+            guard let self else { return }
+            switch action {
+            case let .didChooseVacancy(vacancy):
+                favoritesController?.navigationController?.pushViewController(
+                    self.vacancyDetailScreen(vacancy: vacancy),
+                    animated: true
+                )
+            }
+        }
 
         return favoritesController
     }

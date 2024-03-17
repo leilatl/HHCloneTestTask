@@ -46,7 +46,7 @@ extension SearchView {
     var searchBar: some View {
         HStack {
             HStack {
-                Image(systemName: "magnifyingglass")
+                Image.local.magnifyingglass
                     .foregroundStyle(Color.theme.grayText)
                 Text("Должность, ключевые слова")
                     .foregroundStyle(Color.theme.grayText)
@@ -57,7 +57,7 @@ extension SearchView {
             .background(Color.theme.lightGray)
             .clipShape(RoundedRectangle(cornerRadius: 8))
 
-            Image(systemName: "slider.horizontal.3")
+            Image.local.slider
                 .foregroundStyle(Color.white)
                 .padding(8)
                 .background(Color.theme.lightGray)
@@ -69,15 +69,15 @@ extension SearchView {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 8) {
                 recommendation(
-                    image: Image("vacanciesNear"),
+                    image: Image.local.vacanciesNear,
                     title: "Вакансии рядом с вами",
                     hasButton: false)
                 recommendation(
-                    image: Image("raiseCV"),
+                    image: Image.local.raiseCV,
                     title: "Поднять резюме в поиске",
                     hasButton: true)
                 recommendation(
-                    image: Image("temporaryJob"),
+                    image: Image.local.temporaryJob,
                     title: "Временная работа и подработка",
                     hasButton: false)
             }

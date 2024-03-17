@@ -11,6 +11,7 @@ import SwiftUI
 struct EntryView: View {
     @StateObject var viewModel: EntryViewModel
     @FocusState private var isTextFieldFocused: Bool
+    @State private var isShowingError: Bool = false
 
     var body: some View {
         ZStack {
@@ -41,9 +42,20 @@ extension EntryView {
                 .frame(maxWidth: .infinity, alignment: .leading)
             emailTextField
 
+            Text(isShowingError ? "Вы ввели неверный e-mail" : "")
+                .foregroundStyle(Color.red)
+                .font(.system(size: 14))
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.vertical, -6)
+
             HStack {
                 Button(action: {
-                    viewModel.onAction?(.next(viewModel.email))
+                    if viewModel.isEmailValid {
+                        viewModel.onAction?(.next(viewModel.email))
+                    } else {
+                        isShowingError = true
+                    }
+
                 }, label: {
                     Text("Продолжить")
                         .foregroundStyle(
@@ -53,7 +65,6 @@ extension EntryView {
                         )
                         .padding(11)
                 })
-                .disabled(!viewModel.isEmailValid)
                 .frame(maxWidth: .infinity)
                 .background(
                     Color.theme.specialBlue.opacity(
@@ -80,9 +91,9 @@ extension EntryView {
         ZStack(alignment: .leading) {
             if !isTextFieldFocused && viewModel.email.isEmpty {
                 HStack {
-                    Image(systemName: "envelope")
+                    Image.local.envelope
                         .foregroundStyle(Color.theme.grayText)
-                    Text("Enter your email")
+                    Text("Электронная почта или телефон")
                         .foregroundColor(Color.theme.grayText)
                     Spacer()
                 }
@@ -93,22 +104,29 @@ extension EntryView {
                 .foregroundColor(Color.white)
                 .tint(Color.theme.grayText)
                 .padding(.leading, isTextFieldFocused || !viewModel.email.isEmpty ? 0 : 30)
+                .onChange(of: viewModel.email) { _, _ in
+                    isShowingError = false
+                }
 
             if isTextFieldFocused && !viewModel.email.isEmpty {
                 HStack {
                     Spacer()
-                    
+
                     Button(action: {
                         self.viewModel.email = ""
                     }, label: {
-                        Image(systemName: "multiply.circle.fill")
+                        Image.local.cross
                             .foregroundColor(.gray)
                     })
                 }
             }
         }
-        .padding()
-        .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color.gray, lineWidth: 1))
+        .padding(8)
+        .background(Color.theme.lightGray)
+        .overlay(RoundedRectangle(cornerRadius: 8)
+            .stroke(Color.red, lineWidth: isShowingError ? 1 : 0))
+        .clipShape(RoundedRectangle(cornerRadius: 8))
+        .shadow(color: .black.opacity(0.5), radius: 4, x: 0, y: 4)
     }
 
     var searchEmployees: some View {
