@@ -30,6 +30,9 @@
 		CEED12D22BA6B47A001B477B /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEED12D12BA6B47A001B477B /* CoreDataManager.swift */; };
 		CEED12D42BA6C336001B477B /* FavoritesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEED12D32BA6C336001B477B /* FavoritesViewModel.swift */; };
 		CEED12E22BA744F3001B477B /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEED12E12BA744F3001B477B /* Image.swift */; };
+		CEED12E42BA74670001B477B /* ConjugationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEED12E32BA74670001B477B /* ConjugationService.swift */; };
+		CEED12E62BA75198001B477B /* CodeInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEED12E52BA75198001B477B /* CodeInputView.swift */; };
+		CEED12E92BA7578A001B477B /* MainButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEED12E82BA7578A001B477B /* MainButtonStyle.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +61,9 @@
 		CEED12D12BA6B47A001B477B /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		CEED12D32BA6C336001B477B /* FavoritesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewModel.swift; sourceTree = "<group>"; };
 		CEED12E12BA744F3001B477B /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
+		CEED12E32BA74670001B477B /* ConjugationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConjugationService.swift; sourceTree = "<group>"; };
+		CEED12E52BA75198001B477B /* CodeInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeInputView.swift; sourceTree = "<group>"; };
+		CEED12E82BA7578A001B477B /* MainButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainButtonStyle.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,7 +115,7 @@
 			isa = PBXGroup;
 			children = (
 				CEED12CA2BA690D2001B477B /* CoreData */,
-				CEED12BF2BA61C68001B477B /* Provider */,
+				CEED12BF2BA61C68001B477B /* Services */,
 				CEED12B22BA5D90E001B477B /* Favorites */,
 				CEED12B12BA5D908001B477B /* Search */,
 				CEED12B02BA5D7EB001B477B /* Empty */,
@@ -155,7 +161,9 @@
 		CE6D1DFC2B75766500E89C76 /* CommonViews */ = {
 			isa = PBXGroup;
 			children = (
+				CEED12E72BA7576E001B477B /* Design */,
 				CEED12BD2BA610C2001B477B /* VacancyView.swift */,
+				CEED12E52BA75198001B477B /* CodeInputView.swift */,
 			);
 			path = CommonViews;
 			sourceTree = "<group>";
@@ -187,14 +195,15 @@
 			path = Favorites;
 			sourceTree = "<group>";
 		};
-		CEED12BF2BA61C68001B477B /* Provider */ = {
+		CEED12BF2BA61C68001B477B /* Services */ = {
 			isa = PBXGroup;
 			children = (
 				CEED12C02BA61C78001B477B /* VacancyProvider.swift */,
 				CEED12CB2BA69A3B001B477B /* FavoriteVacanciesService.swift */,
 				CEED12D12BA6B47A001B477B /* CoreDataManager.swift */,
+				CEED12E32BA74670001B477B /* ConjugationService.swift */,
 			);
-			path = Provider;
+			path = Services;
 			sourceTree = "<group>";
 		};
 		CEED12C22BA62B5C001B477B /* VacancyDetail */ = {
@@ -212,6 +221,14 @@
 				CEED12C72BA690C5001B477B /* Vacancy.xcdatamodeld */,
 			);
 			path = CoreData;
+			sourceTree = "<group>";
+		};
+		CEED12E72BA7576E001B477B /* Design */ = {
+			isa = PBXGroup;
+			children = (
+				CEED12E82BA7578A001B477B /* MainButtonStyle.swift */,
+			);
+			path = Design;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -285,6 +302,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE5B242E2BA425CC0025782E /* EntryView.swift in Sources */,
+				CEED12E62BA75198001B477B /* CodeInputView.swift in Sources */,
+				CEED12E92BA7578A001B477B /* MainButtonStyle.swift in Sources */,
 				CEED12C62BA62B7E001B477B /* VacancyDetailViewModel.swift in Sources */,
 				CE5B24302BA425D60025782E /* EntryViewModel.swift in Sources */,
 				CEED12CC2BA69A3B001B477B /* FavoriteVacanciesService.swift in Sources */,
@@ -303,6 +322,7 @@
 				CEED12B62BA5D984001B477B /* SearchView.swift in Sources */,
 				CEED12D22BA6B47A001B477B /* CoreDataManager.swift in Sources */,
 				CEED12B82BA5D9AA001B477B /* FavoritesView.swift in Sources */,
+				CEED12E42BA74670001B477B /* ConjugationService.swift in Sources */,
 				CEED12BE2BA610C2001B477B /* VacancyView.swift in Sources */,
 				CE5B24352BA5AD8B0025782E /* SecurityCodeViewModel.swift in Sources */,
 			);

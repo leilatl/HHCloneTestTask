@@ -26,6 +26,23 @@ struct VacancyModel: Decodable, Identifiable {
     let vacancyDescription: String?
     let responsibilities: String
     let questions: [String]?
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case lookingNumber
+        case title
+        case address
+        case company
+        case experience
+        case publishedDate
+        case isFavorite
+        case salary
+        case schedules
+        case appliedNumber
+        case vacancyDescription = "description" // Mapping from JSON
+        case responsibilities
+        case questions
+    }
 }
 
 struct AddressModel: Decodable {

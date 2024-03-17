@@ -40,16 +40,6 @@ class SearchViewModel: ObservableObject {
             .store(in: &cancellables)
     }
     
-    private func updateFavorites(_ favorites: [VacancyModel]) {
-        for (index, vacancy) in vacancies.enumerated() {
-            if let matchingFavorite = favorites.first(where: { $0.id == vacancy.id }) {
-                vacancies[index].isFavorite = matchingFavorite.isFavorite
-            } else {
-                vacancies[index].isFavorite = false
-            }
-        }
-    }
-
     func didTapFavoriteButton(vacancy: VacancyModel) {
         guard let index = vacancies.firstIndex(where: { $0.id == vacancy.id }) else { return }
         vacancies[index].isFavorite.toggle()
@@ -58,6 +48,16 @@ class SearchViewModel: ObservableObject {
             favoriteVacanciesService.addVacancy(vacancies[index])
         } else {
             favoriteVacanciesService.deleteVacancy(vacancies[index])
+        }
+    }
+    
+    private func updateFavorites(_ favorites: [VacancyModel]) {
+        for (index, vacancy) in vacancies.enumerated() {
+            if let matchingFavorite = favorites.first(where: { $0.id == vacancy.id }) {
+                vacancies[index].isFavorite = matchingFavorite.isFavorite
+            } else {
+                vacancies[index].isFavorite = false
+            }
         }
     }
 }

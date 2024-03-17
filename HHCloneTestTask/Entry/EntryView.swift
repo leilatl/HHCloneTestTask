@@ -16,10 +16,7 @@ struct EntryView: View {
     var body: some View {
         ZStack {
             VStack(alignment: .leading) {
-                Text("Вход в личный кабинет")
-                    .foregroundStyle(Color.white)
-                    .font(.system(size: 20, weight: .semibold))
-                    .frame(maxWidth: .infinity, alignment: .leading)
+                title
                 Spacer()
             }
 
@@ -33,7 +30,13 @@ struct EntryView: View {
     }
 }
 
-extension EntryView {
+private extension EntryView {
+    var title: some View {
+        Text("Вход в личный кабинет")
+            .foregroundStyle(Color.white)
+            .font(.system(size: 20, weight: .semibold))
+            .frame(maxWidth: .infinity, alignment: .leading)
+    }
     var searchJob: some View {
         VStack(spacing: 16, content: {
             Text("Поиск Работы")

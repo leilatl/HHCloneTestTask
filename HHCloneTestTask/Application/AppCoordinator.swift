@@ -65,10 +65,6 @@ class AppCoordinator {
                 self?.updateFavoritesTabIcon(count: count)
             }
             .store(in: &cancellables)
-        
-        let peopleCount = 5
-        let peopleString = String.localizedStringWithFormat(NSLocalizedString("%d people", comment: "Number of people"), peopleCount)
-        print("hello \(peopleString)")
     }
 
     func start() {
@@ -128,7 +124,7 @@ class AppCoordinator {
         let viewModel = SecurityCodeViewModel(email: email)
         let securityCodeController = UIHostingController(rootView: SecurityCodeView(viewModel: viewModel))
 
-        viewModel.onAction = { [weak securityCodeController, weak self] action in
+        viewModel.onAction = { [weak self] action in
             guard let self else { return }
             switch action {
             case .next:
@@ -176,8 +172,7 @@ class AppCoordinator {
         let viewModel = VacancyDetailViewModel(vacancy: vacancy, favoriteVacanciesService: sharedFavoriteVacanciesService)
         let vacancyDetailController = UIHostingController(rootView: VacancyDetailView(viewModel: viewModel))
 
-        viewModel.onAction = { [weak vacancyDetailController, weak self] (action: VacancyDetailViewModel.Event) in
-            guard let self else { return }
+        viewModel.onAction = { [weak vacancyDetailController] (action: VacancyDetailViewModel.Event) in
             switch action {
             case .goBack:
                 vacancyDetailController?.navigationController?.popViewController(animated: true)

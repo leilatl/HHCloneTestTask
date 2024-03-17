@@ -11,29 +11,13 @@ struct SearchView: View {
     @StateObject var viewModel: SearchViewModel
 
     var body: some View {
-        VStack(spacing: 0, content: {
+        VStack(spacing: 16, content: {
             searchBar
             recommendations
-                .padding(.top, 16)
-            Text("Вакансии для вас")
-                .foregroundStyle(Color.white)
-                .font(.system(size: 20, weight: .semibold))
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.top, 32)
             vacancies
                 .padding(.top, 16)
             if viewModel.numberOfAllVacancies > 3 {
-                Button(action: {
-                }, label: {
-                    Text("Еще \(viewModel.numberOfAllVacancies - 3) вакансий")
-                        .foregroundStyle(Color.white)
-                        .font(.system(size: 16, weight: .semibold))
-                        .padding(.vertical, 14)
-                })
-                .frame(maxWidth: .infinity)
-                .background(Color.theme.specialBlue)
-                .clipShape(RoundedRectangle(cornerRadius: 8))
-                .padding(.top, 16)
+                moreVacanciesButton
             }
         })
         .padding(.horizontal, 17)
@@ -42,7 +26,7 @@ struct SearchView: View {
     }
 }
 
-extension SearchView {
+private extension SearchView {
     var searchBar: some View {
         HStack {
             HStack {
@@ -100,26 +84,49 @@ extension SearchView {
         .padding(.horizontal, 6)
         .padding(.vertical, 10)
         .frame(width: 132, height: 120, alignment: .leading)
-        .background(Color.theme.lightGray)
+        .background(Color.theme.darkGray)
         .clipShape(RoundedRectangle(cornerRadius: 8))
     }
 
     var vacancies: some View {
-        ScrollView {
-            VStack(spacing: 16) {
-                ForEach(viewModel.vacancies) { vacancy in
-                    VacancyView(vacancyModel: vacancy, onFavoriteButtonTap: {
-                        viewModel.didTapFavoriteButton(vacancy: vacancy)
-                    })
-                    .onTapGesture {
-                        viewModel.onAction?(.didChooseVacancy(vacancy))
+        VStack(spacing: 0) {
+            Text("Вакансии для вас")
+                .foregroundStyle(Color.white)
+                .font(.system(size: 20, weight: .semibold))
+                .frame(maxWidth: .infinity, alignment: .leading)
+                
+            ScrollView {
+                VStack(spacing: 16) {
+                    ForEach(viewModel.vacancies) { vacancy in
+                        VacancyView(vacancyModel: vacancy, onFavoriteButtonTap: {
+                            viewModel.didTapFavoriteButton(vacancy: vacancy)
+                        })
+                        .onTapGesture {
+                            viewModel.onAction?(.didChooseVacancy(vacancy))
+                        }
                     }
                 }
             }
+            .padding(.top, 16)
         }
     }
+    
+    var moreVacanciesButton: some View {
+        Button(action: {
+        }, label: {
+            Text("""
+            Еще \
+            \(viewModel.numberOfAllVacancies - 3) \
+            \(ConjugationService.conjugate(
+            word: .vacancies,
+            number: viewModel.numberOfAllVacancies - 3))
+            """)
+            .foregroundStyle(Color.white)
+            .font(.system(size: 16, weight: .semibold))
+            .padding(.vertical, 14)
+            .frame(maxWidth: .infinity)
+            .background(Color.theme.specialBlue)
+            .clipShape(RoundedRectangle(cornerRadius: 8))
+        })
+    }
 }
-
-// #Preview {
-//    SearchView(viewModel: SearchViewModel())
-// }
