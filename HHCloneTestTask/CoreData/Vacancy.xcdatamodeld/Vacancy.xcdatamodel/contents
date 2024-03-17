@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22222" systemVersion="23A344" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
+    <entity name="Address" representedClassName="Address" syncable="YES" codeGenerationType="class">
+        <attribute name="house" attributeType="String"/>
+        <attribute name="street" attributeType="String"/>
+        <attribute name="town" attributeType="String"/>
+        <relationship name="vacancy" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Vacancy"/>
+    </entity>
+    <entity name="Experience" representedClassName="Experience" syncable="YES" codeGenerationType="class">
+        <attribute name="previewText" attributeType="String"/>
+        <attribute name="text" attributeType="String"/>
+        <relationship name="vacancy" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Vacancy"/>
+    </entity>
+    <entity name="Question" representedClassName="Question" syncable="YES" codeGenerationType="class">
+        <attribute name="questionText" optional="YES" attributeType="String"/>
+        <relationship name="vacancy" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Vacancy"/>
+    </entity>
+    <entity name="Salary" representedClassName="Salary" syncable="YES" codeGenerationType="class">
+        <attribute name="full" optional="YES" attributeType="String"/>
+        <attribute name="short" optional="YES" attributeType="String"/>
+        <relationship name="vacancy" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Vacancy"/>
+    </entity>
+    <entity name="Vacancy" representedClassName="Vacancy" syncable="YES" codeGenerationType="class">
+        <attribute name="appliedNumber" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="company" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="isFavorite" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="lookingNumber" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="publishedDate" attributeType="String"/>
+        <attribute name="responsibilities" attributeType="String"/>
+        <attribute name="title" attributeType="String"/>
+        <attribute name="vacancyDescription" optional="YES" attributeType="String"/>
+        <relationship name="address" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Address"/>
+        <relationship name="experience" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Experience"/>
+        <relationship name="questions" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Question"/>
+        <relationship name="salary" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Salary"/>
+        <relationship name="schedules" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="VacancySchedule"/>
+    </entity>
+    <entity name="VacancySchedule" representedClassName="VacancySchedule" syncable="YES" codeGenerationType="class">
+        <attribute name="scheduleText" optional="YES" attributeType="String"/>
+        <relationship name="vacancy" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Vacancy"/>
+    </entity>
+</model>
